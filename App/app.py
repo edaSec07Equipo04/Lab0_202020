@@ -117,20 +117,25 @@ def main():
     Return: None 
     """
     lista = [] #instanciar una lista vacia
+    lista2 = [] #instanciar una lista vacia para el otro archivo
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/test.csv", lista) #llamar funcion cargar datos
-                print("Datos cargados, "+str(len(lista))+" elementos cargados")
+                loadCSVFile("Data/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos
+                print("Datos cargados, "+str(len(lista))+" elementos cargados en detalles")
+                loadCSVFile("Data/MoviesCastingRaw-small.csv", lista2) #llamar funcion cargar datos
+                print("Datos cargados, "+str(len(lista2))+" elementos cargados en casting")
             elif int(inputs[0])==2: #opcion 2
                 if len(lista)==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
-                else: print("La lista tiene "+str(len(lista))+" elementos")
+                else: 
+                    print("La lista de detalles tiene "+str(len(lista))+" elementos")
+                    print("La lista de casting tiene "+str(len(lista2))+" elementos")
             elif int(inputs[0])==3: #opcion 3
                 criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsFilteredByColumn(criteria, "nombre", lista) #filtrar una columna por criterio  
+                counter=countElementsFilteredByColumn(criteria, "budget", lista) #filtrar una columna por criterio  
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #opcion 4
                 criteria =input('Ingrese el criterio de búsqueda\n')

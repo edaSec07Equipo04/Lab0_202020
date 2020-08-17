@@ -101,11 +101,22 @@ def countElementsFilteredByColumn(criteria, column, lst):
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
     return counter
 
-def countElementsByCriteria(criteria, column, lst):
+def countElementsByCriteria(criteria, column, lst, lst2):
     """
     Retorna la cantidad de elementos que cumplen con un criterio para una columna dada
     """
-    return 0
+    counter = 0
+    idList = []
+    for data in lst2:
+        if data["director_name"] == criteria:
+            idList.append(data["id"])
+    for data in lst:
+        key = list(data.keys())[column]
+        if data["id"] in idList and float(data[key]) >= 1:
+            counter += 1
+    return counter
+    
+    
 
 
 def main():
@@ -139,7 +150,7 @@ def main():
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #opcion 4
                 criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsByCriteria(criteria,0,lista)
+                counter=countElementsByCriteria(criteria,17,lista,lista2)
                 print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
